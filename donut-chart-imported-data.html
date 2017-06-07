@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<title>practise1</title>
+<script src="http://d3js.org/d3.v3.min.js"> </script>
+</head>
+
+<body>
+
+
+<h2><p style= "color:green">one on one meeting</p2><h2>
+<h3>date: 5/17/2017; Wed<h3>
+<h1><center><p style="color:brown">Average age of tickets in each assigned group</p><center><h1>
+<script>
+
+d3.json("http://127.0.0.1:8887/last_six_monthsdata.json",function (data) {
+var r=300; // radius
+
+var color = d3.scale.ordinal()
+				.range(["red","orange","green","grey","blue","skyblue","pink","purple","lightgreen","brown"]);
+
+
+var visualization = d3.select("body")               // definition of visualization variable
+						.append("svg")
+						.attr("width",1200)
+						.attr("height",1000);
+						
+						
+			var group = visualization.append("g")
+						.attr("transform", "translate(630, 300)");
+						
+		var arc = d3.svg.arc()
+					.innerRadius(200)
+					.outerRadius(r);
+					
+		var pie = d3.layout.pie()
+					.value(function (d) { return d.Ticket_Age; });
+					
+		var arcs = group.selectAll(".arc")
+						.data(pie(data))
+						.enter()
+						.append("g")
+						.attr("class","arc");
+						
+						
+						
+		arcs.append("path")
+			.attr("d", arc)
+			.attr("fill", function (d) { return color(d.data.Ticket_Age); });
+			
+			
+			arcs.append("text")
+				.attr("transform", function (d) {return "translate("+ arc.centroid(d)+")";})
+				.attr("text-anchor", "middle")
+				.attr("font-size", "1.5em")
+				.text(function (d) { return d.data.Ticket_Age; });
+				
+				
+				
+					arcs.on("mouseover", function(){d3.select(this).style("fill", "white") ,visualization.selectAll("text")
+    .data(data)
+    .enter()
+	.append("text")
+    .text(function(d) {return d.Ticket_Age}) ;})
+
+        .on("mouseout", function(){d3.select(this).style("fill", "black");});
+				
+				
+})			
+				
+</script>				
+</body>
+</html>						
+						
+ 
