@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<title>practise1</title>
+<script src="https://d3js.org/d3.v3.min.js"> </script>
+</head>
+
+<body>
+<script>
+
+var a = [
+		6,16,42,29,39,9];
+		
+var r=300; // radius
+
+var color = d3.scale.ordinal()
+				.range(["green","orange","red","grey","blue","skyblue"]);
+
+
+var visualization = d3.select("body")               // definition of visualization variable
+						.append("svg")
+						.attr("width",1000)
+						.attr("height",1000);
+						
+						
+			var group = visualization.append("g")
+						.attr("transform", "translate(360, 360)");
+						
+		var arc = d3.svg.arc()
+					.innerRadius(0)
+					.outerRadius(r);
+					
+		var pie = d3.layout.pie()
+					.value(function (d) { return d; });
+					
+		var arcs = group.selectAll(".arc")
+						.data(pie(a))
+						.enter()
+						.append("g")
+						.attr("class","arc");
+						
+						
+						
+		arcs.append("path")
+			.attr("d", arc)
+			.attr("fill", function (d) { return color(d.data); });
+			
+			
+			arcs.append("text")
+				.attr("transform", function (d) {return "translate("+ arc.centroid(d)+")";})
+				.attr("text-anchor", "middle")
+				.attr("font-size", "1.5em")
+				.text(function (d) { return d.data; });
+				
+			
+				
+</script>				
+</body>
+</html>						
+						
+ 
