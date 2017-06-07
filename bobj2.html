@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+<title> basics of svg</title>
+<script src="http://d3js.org/d3.v3.min.js"> </script>
+</head>
+
+<body>
+<script>
+
+var visualization = d3.select("body")
+						.append("svg")
+						.attr("width",1000)
+						.attr("height",1000);
+
+var line1 = visualization.append("line")
+							.attr("x1", 10)
+							.attr("y1", 10)
+							.attr("x2", 10)
+							.attr("y2", 90)
+							.attr("stroke", "grey")
+							.attr("stroke-width", 10);
+							
+var circle2 = visualization.append("circle")
+							.attr("cx", 30)
+							.attr("cy", 30)
+							.attr("r", 25)
+							.attr("fill","grey");		
+
+var circle3 = visualization.append("circle")
+							.attr("cx", 30)
+							.attr("cy", 70)
+							.attr("r", 25)
+							.attr("fill","grey");		
+														
+var circle4 = visualization.append("circle")
+							.attr("cx", 100)
+							.attr("cy", 50)
+							.attr("r", 35)
+							.attr("fill","grey");		
+							
+							
+var line5 = visualization.append("line")
+							.attr("x1", 160)
+							.attr("y1", 10)
+							.attr("x2", 160)
+							.attr("y2", 90)
+							.attr("stroke", "grey")
+							.attr("stroke-width", 10);
+							
+								
+var circle6 = visualization.append("circle")
+							.attr("cx", 180)
+							.attr("cy", 30)
+							.attr("r", 25)
+							.attr("fill","grey");	
+
+							
+var circle7 = visualization.append("circle")
+							.attr("cx", 180)
+							.attr("cy", 70)
+							.attr("r", 25)
+							.attr("fill","grey");							
+						
+						
+	var line8 = visualization.append("line")
+							.attr("x1", 250)
+							.attr("y1", 10)
+							.attr("x2", 250)
+							.attr("y2", 90)
+							.attr("stroke", "grey")
+							.attr("stroke-width", 20);
+
+ var line9 = visualization.append("line")
+							.attr("x1", 225)
+							.attr("y1", 10)
+							.attr("x2", 275)
+							.attr("y2", 10)
+							.attr("stroke", "grey")
+							.attr("stroke-width", 20);
+							
+
+var line10 = visualization.append("line")
+							.attr("x1", 225)
+							.attr("y1", 10)
+							.attr("x2", 275)
+							.attr("y2", 10)
+							.attr("stroke", "grey")
+							.attr("stroke-width", 20);
+
+var line11 = visualization.append("line")
+							.attr("x1", 225)
+							.attr("y1", 87)
+							.attr("x2", 260)
+							.attr("y2", 87)
+							.attr("stroke", "grey")
+							.attr("stroke-width", 20);	
+							
+							
+	circle2.transition()
+		.duration(2000)
+		.delay(1000)
+		.attr("cx",400)
+		.transition()
+		.attr("cy",400)
+		.transition()
+		.attr("cx",30)
+		.transition()
+		.attr("cy",30)
+		.each("end", function () {d3.select(this).attr("fill","green")});
+
+		
+		
+		
+		
+			circle6.transition()
+			.duration(2000)
+		.delay(1000)
+		.attr("cx",700)
+		.transition()
+		.attr("cy",400)
+		.transition()
+		.attr("cx",180)
+		.transition()
+		.attr("cy",30)
+		
+		.each("end", function () {d3.select(this).attr("fill","green")});
+		
+		
+		
+		circle7.transition()
+		
+		.delay(8900)
+		
+				.each("end", function () {d3.select(this).attr("fill","green")});
+				
+				
+					circle3.transition()
+		
+		.delay(8900)
+		
+				.each("end", function () {d3.select(this).attr("fill","green")});
+				
+				
+					circle4.transition()
+		
+		.delay(8900)
+		
+				.each("end", function () {d3.select(this).attr("fill","orange")});
+							
+				line1.transition()
+				
+		.delay(8900)
+		.attr("stroke", "green");
+
+					
+				line5.transition()
+			
+		.delay(8900)
+		.attr("stroke", "green");
+					
+					
+				line8.transition()
+				
+		.delay(8900)
+		.attr("stroke", "orange");
+				
+					
+				line9.transition()
+				
+		.delay(8900)
+		.attr("stroke", "orange");
+				
+					
+				line10.transition()
+				
+		.delay(8900)
+		.attr("stroke", "orange");
+				
+					
+				line11.transition()
+				
+		.delay(8900)
+		.attr("stroke", "orange");
+			
+	
+	</script>
+</body>
+</html>	
