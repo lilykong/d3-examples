@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+<title> bar charts using d3</title>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<style>
+
+body {
+  background-color: lightgreen;  
+}
+.axis {
+	font: 17px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
+.toolTip {
+  position: absolute;
+  display: none;
+  min-width: 80px;
+  height: auto;
+  background: none repeat scroll none;
+  border: 1px solid #6F257F;
+  padding: 14px;
+  text-align: center;
+}
+</style>
+<body>
+<h3>one on one meeting</h3>
+<h3>5/24/2017, Wednesday</h3>
+<h2><center><font color = #cc6666> Average age of tickets in assigned groups</font></center></h2>
+<svg width="1000" height="1000"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script>
+
+
+
+var svg = d3.select("svg"),
+   margin = {top:100, right: 10, bottom: 100, left: 30},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;
+  
+var tooltip = d3.select("body").append("exa").attr("class", "toolTip");
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+  
+var colours = d3.scaleOrdinal()
+    .range(["#cc6666"]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(100,20)");
+
+
+d3.json("https://sairammanikanta.github.io/d3-examples/lastsixmonthsdata.json", function(error, data) {
+    if (error) throw error;
+
+    x.domain(data.map(function(d) { return d.IDC; }));
+   y.domain([0, 50]) ;
+
+    g.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    g.append("g")
+      	.attr("class", "y axis")
+      	.call(d3.axisLeft(y).ticks(5))
+      .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0)
+        .attr("dy", "15em")
+        .attr("fill", "#5D6971")
+        .text("Average age of the ticket");
+		
+
+    g.selectAll(".bar")
+      	.data(data)
+      .enter().append("rect")
+        .attr("x", function(d) { return x(d.IDC); })
+        .attr("y", function(d) { return y(d.Ticket_Age); })
+        .attr("width", x.bandwidth())
+        .attr("height", function(d) { return 800 - y(d.Ticket_Age); })
+        .attr("fill", function(d) { return colours(d.IDC); })
+        .on("mousemove", function(d){
+		d3.select(this).style("fill", "yellow")
+            tooltip
+              .style("left", d3.event.pageX - 50 + "px")
+              .style("top", d3.event.pageY - 70 + "px")
+              .style("display", "inline-block")
+              .html((d.IDC) + "<br>" + (d.Ticket_Age));
+        })
+    		.on("mouseout", function(d){ 
+			d3.select(this).style("fill", "#cc6666")
+			tooltip.style("display", "none");});
+			
+		
+    });
+</script>
+</body>
+</html>
