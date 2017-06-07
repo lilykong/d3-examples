@@ -1,0 +1,130 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"> </script>
+<script>
+$(document).ready(function(){
+  $('#pie').change(function() {
+  d3.select("svg").remove();
+		var a = [6,16,42,29,39,9];
+		var r=300; // radius
+		var color = d3.scale.ordinal().range(["green","orange","red","grey","blue","skyblue"]);
+		var visualization = d3.select("body")               // definition of visualization variable
+							.append("svg")
+							.attr("width",1000)
+							.attr("height",1000);
+		var group = visualization.append("g")
+							.attr("transform", "translate(300, 300)");
+		var arc = d3.svg.arc()
+						.innerRadius(0)
+						.outerRadius(r);
+		var pie = d3.layout.pie()
+						.value(function (d) { return d; });
+						
+		var arcs = group.selectAll(".arc")
+						.data(pie(a))
+						.enter()
+						.append("g")
+						.attr("class","arc");
+							
+		arcs.append("path")
+				.attr("d", arc)
+				.attr("fill", function (d) { return color(d.data); });
+		arcs.append("text")
+					.attr("transform", function (d) {return "translate("+ arc.centroid(d)+")";})
+					.attr("text-anchor", "middle")
+					.attr("font-size", "1.5em")
+					.text(function (d) { return d.data; });
+	});
+	
+	$('#donut').change(function() {
+	
+	d3.select("svg").remove();
+		var a = [6,16,42,29,39,9];				
+		var r=300; // radius
+		var color = d3.scale.ordinal()
+						.range(["green","orange","red","grey","blue","skyblue"]);
+		var visualization = d3.select("body")               // definition of visualization variable
+								.append("svg")
+								.attr("width",1000)
+								.attr("height",1000);						
+		var group = visualization.append("g")
+					.attr("transform", "translate(300, 300)");
+								
+		var arc = d3.svg.arc()
+					.innerRadius(200)
+					.outerRadius(r);
+					
+		var pie = d3.layout.pie()
+					.value(function (d) { return d; });
+					
+		var arcs = group.selectAll(".arc")
+						.data(pie(a))
+						.enter()
+						.append("g")
+						.attr("class","arc");	
+						
+		arcs.append("path")
+			.attr("d", arc)
+			.attr("fill", function (d) { return color(d.data); });		
+			
+		arcs.append("text")
+			.attr("transform", function (d) {return "translate("+ arc.centroid(d)+")";})
+			.attr("text-anchor", "middle")
+			.attr("font-size", "1.5em")
+			.text(function (d) { return d.data; });
+	});
+
+	$('#rectangular_bars').change(function() {
+	d3.select("svg").remove();
+		var a = [6,16,42,29,39,9];
+		var visualization = d3.select("body")               // definition of visualization variable
+							.append("svg")
+							.attr("width",1000)
+							.attr("height",1000);
+								
+		var bar_graph = 	visualization.selectAll("rect")
+									.data(a)
+									.enter()           //contains placeholders for each and every data element
+									.append("rect")    // since we want to append rectangle for each data element
+									.attr("height",function(d) { return d*10; } )   
+									.attr("width",70) // height of each bar is 50 pixels
+							.attr("x", function(d,i){return i*100})
+								.attr("y", function(d, i) {return 600 - (d * 10)})      //Browsers generally read web pages from top left to bottom right, while we read bar charts from bottom to top. To reposition the rectangles, we’ll modify the y attribute to subtract the space on top.
+
+																									// Again, we’ll use function(d, i), and we’ll return a Y value that is taller than our bar chart’s tallest value, let’s say 400. We’ll subtract the returned height of (d * 10) from 400
+						
+									.attr("fill", "orange")															
+									.attr("stroke", "grey")
+									.attr("stroke-width", 5);							
+								
+									
+		var bar_text =	visualization.selectAll("text")
+		.data(a)
+		.enter()
+		.append("text")
+		.text(function(d) {return d})
+			  .attr("x", function(d, i) {return (i * 110)})
+			  .attr("y", function(d, i) {return 620 - (d * 10)});
+	});
+});
+</script>
+</head>
+<body>
+<div class="widget">
+  <fieldset>
+    <legend>Select a chart type: </legend>
+    <input type="radio" name="radio-1" id="pie">	
+    <label for="radio-1">Pie</label>
+    <input type="radio" name="radio-1" id="donut">
+    <label for="radio-2">DoNut</label>
+    <input type="radio" name="radio-1" id="rectangular_bars">
+    <label for="radio-3">Rectangular_Bars</label>
+  </fieldset>   
+ </div>  
+</br>
+ 
+</body>
+</html>
