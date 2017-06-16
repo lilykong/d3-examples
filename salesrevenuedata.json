@@ -8,9 +8,9 @@
 { "group": "San Francisco", "category": "2004", "measure": 23549.7526 }, 
 { "group": "San Francisco", "category": "2005", "measure": 1909.4394 }, 
 { "group": "San Francisco", "category": "2006", "measure": 7637.7576 },  
-{ "group": "Washington DC", "category": "2004", "measure": 15275.5152 }, 
-{ "group": "Washington DC", "category": "2005", "measure": 4166.0496 }, 
-{ "group": "Washington DC", "category": "2006", "measure": 11803.8072 }, 
+{ "group": "Washington", "category": "2004", "measure": 15275.5152 }, 
+{ "group": "Washington", "category": "2005", "measure": 4166.0496 }, 
+{ "group": "Washington", "category": "2006", "measure": 11803.8072 }, 
 { "group": "Colorado Springs", "category": "2004", "measure": 7406.3104 },  
 { "group": "Colorado Springs", "category": "2005", "measure": 8563.5464 }, 
 { "group": "Colorado Springs", "category": "2006", "measure": 3008.8136 }
