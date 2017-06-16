@@ -53,10 +53,7 @@
     <div id="barChart"></div>  
     <div id="lineChart"></div>
     <script type="text/javascript">
-	
-///	var d3.json("http://127.0.0.1:8887/dataset.json",function (data) {
-//console.log(data);
-//})
+
     
 /*
 ################ FORMATS ##################
@@ -81,12 +78,7 @@ var 	formatAsPercentage = d3.format("%"),
 */
 
 var datasetBarChart = d3.json("https://sairammanikanta.github.io/d3-examples/salesrevenuedata.json",function (datasetBarChart) {
-console.log(datasetBarChart);
-
-
-		var dataset = d3.json("https://sairammanikanta.github.io/d3-examples/citynames.json",function (dataset)		{
-console.log(dataset);
-	
+		var dataset = d3.json("https://sairammanikanta.github.io/d3-examples/citynames.json",function (dataset)		{	
 	
 	var tooltip = d3.select("body").append("exa").attr("class", "toolTip");
 
@@ -136,7 +128,7 @@ var color = d3.scale.ordinal()
 	
 	function mouseout() {
 	  d3.select(this).select("path").transition()
-	      .duration(1000)
+	      .duration(100)
 	        		
 	        		.attr("d", arcFinal)
 	        		;
@@ -179,7 +171,6 @@ var color = d3.scale.ordinal()
 
 	
 	function up(d, i) {
-				console.log("color is "+color(i));
 				/* update bar chart when user selects piece of the pie chart */
 				//updateBarChart(dataset[i].category);
 				updateBarChart(d.data.category, color(i));
@@ -195,20 +186,16 @@ var color = d3.scale.ordinal()
 */
 
 
-
-
-console.log("This is ");
-console.log(datasetBarChart);
-
-console.log(datasetBarChart);
 // set initial group value
 var group = "All";
 
 function datasetBarChosen(group) {
-
+	console.log("nh_group is "+group);
 	var ds = [];
 	for (x in datasetBarChart) {
+		console.log("entered for");
 		 if(datasetBarChart[x].group==group){
+			console.log("nh_dataif entered");
 		 	ds.push(datasetBarChart[x]);
 		 } 
 		}
@@ -368,14 +355,14 @@ function updateBarChart(group, colorChosen) {
 		var currentDatasetBarChart = datasetBarChosen(group);
 		
 		var basics = dsBarChartBasics();
-	
+		console.log("now in update"+basics.colorBar);
 		var margin = basics.margin,
 			width = basics.width,
 		   height = basics.height,
 			colorBar = basics.colorBar,
 			barPadding = basics.barPadding
 			;
-		console.log("colorbar is"+colorBar);
+		
 		var 	xScale = d3.scale.linear()
 			.domain([0, currentDatasetBarChart.length])
 			.range([0, width])
@@ -388,7 +375,7 @@ function updateBarChart(group, colorChosen) {
 	      ;
 	      
 	   var svg = d3.select("#barChart svg");
-	      
+	      console.log("color chosen is "+colorChosen);
 	   var plot = d3.select("#barChartPlot")
 	   	.datum(currentDatasetBarChart)
 		   ;
