@@ -1,0 +1,17 @@
+[
+{ "group": "All", "category": "2004", "measure": 63850.4963 }, 
+{ "group": "All", "category": "2005", "measure": 78258.0845 }, 
+{ "group": "All", "category": "2006", "measure": 60610.2355 },  
+{ "group": "Los Angeles", "category": "2004", "measure": 19441.5648 }, 
+{ "group": "Los Angeles", "category": "2005", "measure": 25922.0864 }, 
+{ "group": "Los Angeles", "category": "2006", "measure": 19441.5648 },  
+{ "group": "San Francisco", "category": "2004", "measure": 23549.7526 }, 
+{ "group": "San Francisco", "category": "2005", "measure": 1909.4394 }, 
+{ "group": "San Francisco", "category": "2006", "measure": 7637.7576 },  
+{ "group": "Washington DC", "category": "2004", "measure": 15275.5152 }, 
+{ "group": "Washington DC", "category": "2005", "measure": 4166.0496 }, 
+{ "group": "Washington DC", "category": "2006", "measure": 11803.8072 }, 
+{ "group": "Colorado Springs", "category": "2004", "measure": 7406.3104 },  
+{ "group": "Colorado Springs", "category": "2005", "measure": 8563.5464 }, 
+{ "group": "Colorado Springs", "category": "2006", "measure": 3008.8136 }
+]
