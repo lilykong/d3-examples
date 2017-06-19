@@ -2,18 +2,16 @@
 <!DOCTYPE html>
 <html>
   <head>    
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Testing Pie Chart</title>
-   <!--<script type="text/javascript" src="d3/d3.v2.js"></script>-->
-    <script src="https://d3js.org/d3.v2.js"></script>
-	<!-- Note: I made good use of the sample code provided by the D3JS community and extended it to fit my needs to create this simple dashboard -->
-    <style type="text/css">
+    <title>DASHBOARD	</title>
+    <script src="http://d3js.org/d3.v2.js"></script>
+	
+    <style>
 
 
 #pieChart {    
 	position:absolute;
-	top:10px;
-	left:10px;
+	top:100px;
+	left:70px;
 	width:400px;
 	height: 400px; 
 }
@@ -22,24 +20,19 @@
 
 #barChart {
 	position:absolute;
-	top:160px;
-	left:410px;
-	height: 250px;
+	top:100px;
+	left:370px;
+	height: 300px;
 }
 
-.slice {
-   font-size: 12pt;
-   font-family: Verdana;
-   fill: white; //svg specific - instead of color
-   font-weight: bold;	
-  		} 
+
 
 .toolTip {
   position: absolute;
   display: none;
   min-width: 80px;
   height: auto;
-  background: none repeat scroll skyblue;
+  background: none repeat scroll none;
   border: 1px solid #6F257F;
   padding: 14px;
   text-align: center;
@@ -52,43 +45,40 @@
     <div id="pieChart"></div>
     <div id="barChart"></div>  
     <div id="lineChart"></div>
-    <script type="text/javascript">
+    <script>
+	
+//	var d3.json("http://127.0.0.1:8887/dataset.json",function (data) {
+//console.log(data);
+//})
+   
 
-    
-/*
-################ FORMATS ##################
--------------------------------------------
-*/
-
-
-var 	formatAsPercentage = d3.format("%"),
-		formatAsPercentage1Dec = d3.format(".1%"),
-		formatAsInteger = d3.format(","),
-		fsec = d3.time.format("%S s"),
-		fmin = d3.time.format("%M m"),
-		fhou = d3.time.format("%H h"),
-		fwee = d3.time.format("%a"),
-		fdat = d3.time.format("%d d"),
-		fmon = d3.time.format("%b")
-		;
+var 	
+		formatAsInteger = d3.format(",");
+		
 
 /*
 ############# PIE CHART ###################
 -------------------------------------------
 */
 
-var datasetBarChart = d3.json("https://sairammanikanta.github.io/d3-examples/salesrevenuedata.json",function (datasetBarChart) {
-		var dataset = d3.json("https://sairammanikanta.github.io/d3-examples/citynames.json",function (dataset)		{	
+var datasetBarChart = d3.json("http://127.0.0.1:8887/sr1.json",function (datasetBarChart) {
+console.log(datasetBarChart);
+
+
+
+		var dataset = d3.json("http://127.0.0.1:8887/citynames.json",function (dataset)		{
+console.log(dataset);
+	
 	
 	var tooltip = d3.select("body").append("exa").attr("class", "toolTip");
 
 var color = d3.scale.ordinal()
 				.range(["lightgreen","orange","lightblue","pink"]);
 				
-	var 	width = 1000,
-		   height = 1000,
+	var 	width = 800,
+		   height = 400,
 		   
-          outerRadius=300, // radius
+          outerRadius=200, // radius
 
          innerRadiusdonut = outerRadius * .5;
 		   
@@ -128,15 +118,14 @@ var color = d3.scale.ordinal()
 	
 	function mouseout() {
 	  d3.select(this).select("path").transition()
-	      .duration(100)
+	      .duration(1000)
 	        		
 	        		.attr("d", arcFinal)
 	        		;
 	}
 	
 				 
-						
-						
+											
 						
 		arcs.append("path")
 			.attr("d", arc)
@@ -150,7 +139,7 @@ var color = d3.scale.ordinal()
 				.text(function (d) { return d.data.category; });
 				
 				
-				arcs.on("mouseover", function(){d3.select(this).style("fill", "white") 
+				arcs.on("mouseover", function(){d3.select(this) 
 				.selectAll("text")
 				.on("mousemove", function(d){
             tooltip
@@ -166,11 +155,12 @@ var color = d3.scale.ordinal()
         .on("mouseout", function(){d3.select(this).style("fill", "black")
 		tooltip.style("display", "none");});
 				
-
 			})
 
+			
 	
 	function up(d, i) {
+	
 				/* update bar chart when user selects piece of the pie chart */
 				//updateBarChart(dataset[i].category);
 				updateBarChart(d.data.category, color(i));
@@ -180,22 +170,21 @@ var color = d3.scale.ordinal()
 
 
 
-/*
-############# BAR CHART ###################
--------------------------------------------
-*/
 
 
+
+console.log("This is ");
+console.log(datasetBarChart);
+
+console.log(datasetBarChart);
 // set initial group value
 var group = "All";
 
 function datasetBarChosen(group) {
-	console.log("nh_group is "+group);
+
 	var ds = [];
 	for (x in datasetBarChart) {
-		console.log("entered for");
 		 if(datasetBarChart[x].group==group){
-			console.log("nh_dataif entered");
 		 	ds.push(datasetBarChart[x]);
 		 } 
 		}
@@ -206,12 +195,11 @@ function datasetBarChosen(group) {
 function dsBarChartBasics() {
 
 		var margin = {top: 30, right: 50, bottom: 20, left: 250},
-		width = 500 - margin.left - margin.right,
-	   height = 550 - margin.top - margin.bottom,
+		width = 550 - margin.left - margin.right,
+	   height = 400 - margin.top - margin.bottom,
 		colorBar = d3.scale.ordinal()
 				.range(["lightgreen","orange","lightblue","pink"]);
-		barPadding = 20
-		;
+		barPadding = 5		;
 		
 		return {
 			margin : margin, 
@@ -242,15 +230,9 @@ function dsBarChart() {
 						;
 						
 	// Create linear y scale 
-	// Purpose: No matter what the data is, the bar should fit into the svg area; bars should not
 	// get higher than the svg height. Hence incoming data needs to be scaled to fit into the svg area.  
 	var yScale = d3.scale.linear()
-			// use the max funtion to derive end point of the domain (max value of the dataset)
-			// do not use the min value of the dataset as min of the domain as otherwise you will not see the first bar
 		   .domain([0, d3.max(firstDatasetBarChart, function(d) { return d.measure; })])
-		   // As coordinates are always defined from the top left corner, the y position of the bar
-		   // is the svg height minus the data value. So you basically draw the bar starting from the top. 
-		   // To have the y position calculated by the range function
 		   .range([height, 0])
 		   ;
 	
@@ -260,13 +242,19 @@ function dsBarChart() {
 			.append("svg")
 		    .attr("width", width + margin.left + margin.right)
 		    .attr("height", height + margin.top + margin.bottom)
-		    .attr("id","barChartPlot")
-		    ;
+
+		    .attr("id","barChartPlot");
+			
+		    
 	
 	var plot = svg
 		    .append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+			.attr("stroke", "black")
+							.attr("stroke-width", 1)
+						
 		    ;
+			
 	            
 	plot.selectAll("rect")
 		   .data(firstDatasetBarChart)
@@ -275,7 +263,7 @@ function dsBarChart() {
 			.attr("x", function(d, i) {
 			    return xScale(i);
 			})
-		   .attr("width", width / firstDatasetBarChart.length - barPadding)   
+		   .attr("width",   width / firstDatasetBarChart.length - barPadding)   
 			.attr("y", function(d) {
 			    return yScale(d.measure);
 			})  
@@ -336,11 +324,11 @@ function dsBarChart() {
 	// Title
 	
 	svg.append("text")
-		.attr("x", (width + margin.left + margin.right)/2)
-		.attr("y", 50)
+		.attr("x",950 - (width + margin.left + margin.right))
+		.attr("y", 2)
 		.attr("class","title")				
 		.attr("text-anchor", "middle")
-		.text("Overall Sales Breakdown 2012")
+		.text("Aggregate Sales Revenue in each year")
 		;
 }
 
@@ -348,14 +336,13 @@ dsBarChart();
 
  /* ** UPDATE CHART ** */
  
-/* updates bar chart on request */
 
 function updateBarChart(group, colorChosen) {
-		
+	
 		var currentDatasetBarChart = datasetBarChosen(group);
 		
 		var basics = dsBarChartBasics();
-		console.log("now in update"+basics.colorBar);
+	
 		var margin = basics.margin,
 			width = basics.width,
 		   height = basics.height,
@@ -375,7 +362,7 @@ function updateBarChart(group, colorChosen) {
 	      ;
 	      
 	   var svg = d3.select("#barChart svg");
-	      console.log("color chosen is "+colorChosen);
+	      
 	   var plot = d3.select("#barChartPlot")
 	   	.datum(currentDatasetBarChart)
 		   ;
@@ -397,6 +384,7 @@ function updateBarChart(group, colorChosen) {
 			})
 			.attr("fill", colorChosen)
 			;
+
 		
 		plot.selectAll("text.yAxis") // target the text element(s) which has a yAxis class defined
 			.data(currentDatasetBarChart)
@@ -407,7 +395,7 @@ function updateBarChart(group, colorChosen) {
 		   		return (i * (width / currentDatasetBarChart.length)) + ((width / currentDatasetBarChart.length - barPadding) / 2);
 		   })
 		   .attr("y", function(d) {
-		   		return yScale(d.measure) + 14;
+		   		return yScale(d.measure) + 15;
 		   })
 		   .text(function(d) {
 				return formatAsInteger(d3.round(d.measure));
@@ -417,11 +405,10 @@ function updateBarChart(group, colorChosen) {
 		
 
 		svg.selectAll("text.title") // target the text element(s) which has a title class defined
-			.attr("x", (width + margin.left + margin.right)/2)
-			.attr("y", 15)
-			.attr("class","title")				
+			.attr("x",950 - (width + margin.left + margin.right))
+			.attr("y", 10)
 			.attr("text-anchor", "middle")
-			.text(group + "'s Sales Breakdown 2012")
+			.text(group + " Sales Revenue")
 		;
 }
 
@@ -433,6 +420,3 @@ function updateBarChart(group, colorChosen) {
     </script>
   </body>
 </html>
-
-
-trail3
