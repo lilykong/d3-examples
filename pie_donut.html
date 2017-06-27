@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<title>pie to donut</title>
+
+<style>
+.toolTip {
+  position: absolute;
+  display: none;
+  min-width: 80px;
+  height: auto;
+  background: none repeat scroll none;
+  border: 1px solid #6F257F;
+  padding: 14px;
+  text-align: center;
+}
+
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+var tooltip = d3.select("body").append("exa").attr("class", "toolTip");
+
+var visualization = d3.select("body")               // definition of visualization variable
+						.append("svg")
+						.attr("width",1000)
+						.attr("height",2000);
+
+
+		
+	d3.json("http://127.0.0.1:8887/citynames.json",function (data) {
+	
+	
+
+
+				
+		
+var outerRadius=300, // radius
+
+  innerRadiusdonut = outerRadius * .5;
+
+
+var color = d3.scale.ordinal()
+				.range(["lightgreen","orange","lightblue","pink"]);
+				
+
+					
+			var group2 = visualization.append("g")
+						.attr("transform", "translate(500, 360)");
+						
+		var arc = d3.svg.arc()
+					.innerRadius(0)
+					.outerRadius(200);
+					
+		var arcFinal = d3.svg.arc().innerRadius(innerRadiusdonut).outerRadius(outerRadius);
+	
+					
+		var pie = d3.layout.pie()
+					.value(function (d) { return d.measure; }
+);
+					
+		var arcs = group2.selectAll(".arc")
+						.data(pie(data))
+						.enter()
+						.append("g")
+						.attr("class","arc")
+				
+    				.on("mouseout", mouseout)
+					
+	
+	
+	function mouseout() {
+	  d3.select(this).select("path").transition()
+	      .duration(1000)
+	        		
+	        		.attr("d", arcFinal)
+	        		;
+	}
+	
+				 
+						
+						
+						
+		arcs.append("path")
+			.attr("d", arc)
+			.attr("fill", function (d) { return color(d.data.category); });
+			
+			
+			arcs.append("text")
+				.attr("transform", function (d) {return "translate("+ arc.centroid(d)+")";})
+				.attr("text-anchor", "middle")
+				.attr("font-size", "15")
+				.text(function (d) { return d.data.category; });
+				
+				
+				arcs.on("mouseover", function(){d3.select(this).style("fill", "white") 
+				.selectAll("text")
+				.on("mousemove", function(d){
+            tooltip
+              .style("left", d3.event.pageX - 50 + "px")
+              .style("top", d3.event.pageY - 70 + "px")
+              .style("display", "inline-block")
+             .html((d.data.category) + "<br>" + (d.data.measure));
+			  })
+       
+ 
+
+        .on("mouseout", function(){d3.select(this).style("fill", "black")
+		tooltip.style("display", "none");});
+				
+
+			})
+
+	
+		})		
+			
+			</script>
+			</body>
+			</html>
+			
