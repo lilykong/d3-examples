@@ -1,0 +1,52 @@
+
+ {
+ "name": "Alka",
+ "children": [
+ {
+ "name":"Abdul",
+ "children":[
+ {"name":"Ashok",
+ "children":[
+ {"name":"Sai Ram"},
+ {"name":"Jayanth"}
+ ]
+ },
+ {"name": "Kuldeep",
+ "children":[
+ {"name":"Chandrika"}
+ ]
+ },
+ 
+ {"name": "Himanshu",
+ "children":[
+ {"name":"Harika"}
+ ]
+ 
+ 
+ }
+ ]
+ },
+ {
+ "name":"Lavanya",
+ "children":[
+ {"name":"a" },
+ {"name": "b"}
+ ]
+ },
+
+{
+ "name":"deepak",
+ "children":[
+ {"name":"a" },
+ {"name": "b"}
+ ]
+ },
+ {
+ "name":"vaishali",
+ "children":[
+ {"name":"a" },
+ {"name": "b"}
+ ]
+ }
+ ]
+ }
